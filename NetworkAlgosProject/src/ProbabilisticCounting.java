@@ -47,13 +47,12 @@ public class Project2 {
             }
             int setbits = 0;
             for(boolean b:bitmap){
-            	if(b) setbits++;
+            	if(!b) setbits++;
             }
             double v = (double)setbits/(double)(size);
             double unique = -1*(size)*(Math.log(v));
-            System.out.println(key+"    "+unique);
-//            writer.write(key+"		"+unique);
-//            writer.newLine();
+            writer.write(key+"		"+unique);
+            writer.newLine();
         }
 
         writer.close();
