@@ -34,6 +34,7 @@ public class Project1 {
 	              new FileOutputStream(foutput), "utf-8")))
 		{
 			writer.write("Source Address	No of unique destinations");
+			writer.newLine();
 			for(String key:map.keySet())
 			{
 				writer.write(key+"	"+map.get(key).size());
