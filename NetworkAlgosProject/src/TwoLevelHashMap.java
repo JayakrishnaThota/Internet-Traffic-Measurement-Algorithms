@@ -1,7 +1,14 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
 
-public class Project1 {
+public class TwoLevelHashMap {
 	public static void main(String[] args){
 		File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
 		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/two_level_hash_output.txt");
