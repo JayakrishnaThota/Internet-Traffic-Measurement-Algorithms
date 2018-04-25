@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Project2 {
+public class ProbabilisticCounting {
 	public static void main(String[] args)throws Exception
     {
 		HashMap<String,ArrayList<String>> source_hash  = new HashMap<>();
