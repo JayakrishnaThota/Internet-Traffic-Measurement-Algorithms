@@ -4,11 +4,9 @@ import java.util.*;
 public class ProbabilisticCounting {
 	public static void main(String[] args)throws Exception
     {
-		HashMap<String,ArrayList<String>> source_hash  = new HashMap<>();
 		File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
 		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/probabilistic_counting.txt");
-        BufferedReader br = new BufferedReader(new FileReader(finput));
-        Map<String,Set<String>> map = new HashMap();
+        Map<String,Set<String>> map = new HashMap<String,Set<String>>();
 		Scanner sc = null;
 		try
 		{
@@ -39,7 +37,7 @@ public class ProbabilisticCounting {
         for (String key:map.keySet()) {
             int size = 500;
             boolean[] bitmap = new boolean[size];
-            List<String> destinations = new ArrayList(map.get(key));
+            List<String> destinations = new ArrayList<String>(map.get(key));
             for(int i=0; i<destinations.size(); i++)
             {
                 int index = Math.abs((destinations.get(i).hashCode())%size);
