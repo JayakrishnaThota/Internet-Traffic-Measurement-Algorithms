@@ -33,7 +33,7 @@ public class BloomFilter {
 		File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
         Set<String> set = new HashSet<String>();
         List<Integer> randomList = getRandomList(10);
-        int width = 6000000;
+        int width = 4100000;
         int k = 3;
         int[] map = new int[width];
 		Scanner sc = new Scanner(finput);
@@ -52,20 +52,22 @@ public class BloomFilter {
 			sc.close();
 		List<String> generatedIPS = getIPS(20000);
 		int count = 0, ans = 1, total = 0;
-		for(String s : generatedIPS) {
+		for(String ip : generatedIPS) {
 			ans = 1;
-			if(!set.contains(s)) {
+			if(!set.contains(ip))
+			{
 				count++;
-				int key = Math.abs(s.hashCode());
+				int key = ip.hashCode();
+				if(key<0) key = -key;
 				for(int i = 0; i < k; i++) {
-					int r = key ^ randomList.get(i);
-					ans &= map[r % width];
+					int xor = key ^ randomList.get(i);
+					ans = ans & map[xor % width];
 				}
 			}
-			if(ans == 1)
-				total++;
+			total+=(ans==1)?1:0;
 		}
-		System.out.println(count + "		" + total);
+		System.out.println(count);
+		System.out.println(total);
 		System.out.println((double) total/count);
 	}
 }
