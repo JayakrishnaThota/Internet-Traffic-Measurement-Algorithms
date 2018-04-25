@@ -12,7 +12,7 @@ public class TwoLevelHashMap {
 	public static void main(String[] args){
 		File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
 		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/two_level_hash_output.txt");
-		Map<String,Set<String>> map = new HashMap();
+		Map<String,Set<String>> map = new HashMap<String,Set<String>>();
 		Scanner sc = null;
 		try
 		{
