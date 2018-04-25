@@ -5,7 +5,7 @@ public class ProbabilisticCounting {
 	public static void main(String[] args)throws Exception
     {
 		File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
-		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/probabilistic_counting.txt");
+		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/probabilisticcounting.txt");
         Map<String,Set<String>> map = new HashMap<String,Set<String>>();
 		Scanner sc = null;
 		try
@@ -52,7 +52,6 @@ public class ProbabilisticCounting {
             writer.write(key+"		"+unique);
             writer.newLine();
         }
-
         writer.close();
     }
 }
