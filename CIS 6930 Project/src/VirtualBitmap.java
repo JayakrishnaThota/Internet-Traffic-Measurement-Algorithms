@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class VirtualBitmap {
 	public static void main(String[] args)throws IOException
     {
-        File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
+		File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
 		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/virtualbitmap.txt");
 		Map<String, HashSet<String>> map = new HashMap<String, HashSet<String>>();
 		Scanner sc = null;
@@ -66,7 +66,7 @@ public class VirtualBitmap {
 	              new FileOutputStream(foutput), "utf-8"));
         try
 		{
-			writer.write("Source Address		Destination Address		Estimate");
+			writer.write("Source Address		Destination Address			Estimate");
 			writer.newLine();
 			for(String key:map.keySet())
 			{
@@ -88,7 +88,7 @@ public class VirtualBitmap {
 	            }
 	            double prob_one_count = (double)virtual_zero_count/(double)small_size;
 	            double estimate = (Math.log(bitmap_one_prob) - Math.log(prob_one_count))*small_size;
-	            writer.write(key+"		"+map.get(key).size()+"		"+Math.abs(estimate));
+	            writer.write(key+"\t\t"+map.get(key).size()+"\t\t"+Math.abs(estimate));
 	            writer.newLine();
 			}
 		}
@@ -116,7 +116,7 @@ public class VirtualBitmap {
             }
             double prob_one_count = (double)virtual_zero_count/(double)small_size;
             double estimate = (Math.log(bitmap_one_prob) - Math.log(prob_one_count))*small_size;
-            writer.write(key+"		"+map.get(key).size()+"			"+Math.abs(estimate));
+            writer.write(key+"\t\t"+map.get(key).size()+"\t\t"+Math.abs(estimate));
 			writer.newLine();
         }
         writer.close();
