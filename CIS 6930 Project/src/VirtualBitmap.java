@@ -50,8 +50,8 @@ public class VirtualBitmap {
             int hash = Math.abs(key.hashCode());
             for (String destination:set)
             {
-                Integer random_index = Math.abs(destination.hashCode())%(small_size);
-                Integer index = (hash ^ random.get(random_index));
+                Integer ri = Math.abs(destination.hashCode())%(small_size);
+                Integer index = (hash ^ random.get(ri));
                 bitmap[Math.abs(index.hashCode()) % large_size] = 1;
             }
         }
@@ -61,7 +61,7 @@ public class VirtualBitmap {
             if(bitmap[i] == 0)
                 c0++;
         }
-        double bitmap_one_prob = (double) c0/(double) large_size;
+        double p1 = (double) c0/(double) large_size;
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
 	              new FileOutputStream(foutput), "utf-8"));
         try
@@ -70,24 +70,24 @@ public class VirtualBitmap {
 			writer.newLine();
 			for(String key:map.keySet())
 			{
-				int virtual_zero_count = 0;
-	            int[] virtual_bitmap = new int[small_size];
-	            Integer hash_source = Math.abs(key.hashCode());
+				int vc0 = 0;
+				Integer hash = Math.abs(key.hashCode());
+	            int[] vbitmap = new int[small_size];
 	            for(int i=0; i<small_size; i++)
 	            {
-	                Integer rand_index = random.get(i);
-	                Integer source_h = hash_source ^ rand_index;
-	                Integer srch = Math.abs(source_h.hashCode());
-	                if(bitmap[srch % large_size] == 1)
-	                    virtual_bitmap[i] = 1;
+	                Integer ri = random.get(i);
+	                Integer sh= hash ^ ri;
+	                Integer srh = Math.abs(sh.hashCode());
+	                if(bitmap[srh % large_size] == 1)
+	                	vbitmap[i] = 1;
 	            }
 	            for(int i=0; i< small_size; i++)
 	            {
-	                if(virtual_bitmap[i] == 0)
-	                    virtual_zero_count++;
+	                if(vbitmap[i] == 0)
+	                	vc0++;
 	            }
-	            double prob_one_count = (double)virtual_zero_count/(double)small_size;
-	            double estimate = (Math.log(bitmap_one_prob) - Math.log(prob_one_count))*small_size;
+	            double pc1 = (double)vc0/(double)small_size;
+	            double estimate = (Math.log(p1) - Math.log(pc1))*small_size;
 	            writer.write(key+"\t\t"+map.get(key).size()+"\t\t"+Math.abs(estimate));
 	            writer.newLine();
 			}
@@ -98,24 +98,24 @@ public class VirtualBitmap {
 		}
         for(String key:map.keySet())
         {
-            int virtual_zero_count = 0;
-            int[] virtual_bitmap = new int[small_size];
-            Integer hash_source = Math.abs(key.hashCode());
+            int vc0 = 0;
+            int[] vbitmap = new int[small_size];
+            Integer hash = Math.abs(key.hashCode());
             for(int i=0; i<small_size; i++)
             {
                 Integer rand_index = random.get(i);
-                Integer source_h = hash_source ^ rand_index;
-                Integer srch = Math.abs(source_h.hashCode());
-                if(bitmap[srch % large_size] == 1)
-                    virtual_bitmap[i] = 1;
+                Integer s = hash ^ rand_index;
+                Integer srh = Math.abs(s.hashCode());
+                if(bitmap[srh % large_size] == 1)
+                    vbitmap[i] = 1;
             }
             for(int i=0; i< small_size; i++)
             {
-                if(virtual_bitmap[i] == 0)
-                    virtual_zero_count++;
+                if(vbitmap[i] == 0)
+                    vc0++;
             }
-            double prob_one_count = (double)virtual_zero_count/(double)small_size;
-            double estimate = (Math.log(bitmap_one_prob) - Math.log(prob_one_count))*small_size;
+            double prob_one_count = (double)vc0/(double)small_size;
+            double estimate = (Math.log(p1) - Math.log(prob_one_count))*small_size;
             writer.write(key+"\t\t"+map.get(key).size()+"\t\t"+Math.abs(estimate));
 			writer.newLine();
         }
