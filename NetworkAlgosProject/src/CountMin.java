@@ -1,6 +1,15 @@
-import java.util.*;
-import java.io.*;
-public class Project5 {
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+
+public class CountMin {
 	public static void main(String[] args)throws Exception {
         int size = 1000000;
         int[][] hash = new int[3][size];
