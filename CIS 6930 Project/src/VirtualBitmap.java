@@ -12,11 +12,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.jfree.ui.RefineryUtilities;
+
 public class VirtualBitmap {
 	public static void main(String[] args)throws IOException
     {
-		File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
-		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/virtualbitmap.txt");
+		File finput = new File("C:\\Users\\Ajantha\\Desktop\\CN\\ITMProject\\Input\\traffic.txt");
+		File foutput = new File("C:\\Users\\Ajantha\\Desktop\\CN\\ITMProject\\Input\\virtual.txt");
 		Map<String, HashSet<String>> map = new HashMap<String, HashSet<String>>();
 		Scanner sc = null;
 		try
@@ -96,6 +98,7 @@ public class VirtualBitmap {
 		{
 			e.printStackTrace();
 		}
+        HashMap<Integer,Integer> result_graph_hash = new HashMap<>(); 
         for(String key:map.keySet())
         {
             int vc0 = 0;
@@ -116,8 +119,14 @@ public class VirtualBitmap {
             }
             double prob_one_count = (double)vc0/(double)small_size;
             double estimate = (Math.log(p1) - Math.log(prob_one_count))*small_size;
+            result_graph_hash.put(map.get(key).size(),(int)estimate);
+            XYChart chart = new XYChart("Flow Cardinality", "Original vs Estimated", result_graph_hash);
+            chart.pack();
+            RefineryUtilities.centerFrameOnScreen(chart);
+            chart.setVisible(true);
             writer.write(key+"\t\t"+map.get(key).size()+"\t\t"+Math.abs(estimate));
 			writer.newLine();
+		
         }
         writer.close();
     }
