@@ -9,13 +9,15 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.jfree.ui.RefineryUtilities;
+
 public class CountMin {
 	public static void main(String[] args)throws Exception {
         int size = 1000000;
         int[][] hash = new int[3][size];
         Map<String, Integer> map = new HashMap<>();
-        File finput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/traffic.txt");
-		File foutput = new File("C:/Users/JayaKrishna/Desktop/Nad/project/countmin.txt");
+        File finput = new File("C:\\Users\\Ajantha\\Desktop\\CN\\ITMProject\\Input\\traffic.txt");
+		File foutput = new File("C:\\Users\\Ajantha\\Desktop\\CN\\ITMProject\\Input\\virtual.txt");
 		Scanner sc = null;
 		try
 		{
@@ -55,7 +57,7 @@ public class CountMin {
                 hash[i][index] += map.get(key);
             }
         }
-
+        HashMap<Integer, Integer> result_graph_hash = new HashMap<>();
         for(String key:map.keySet())
         {
             int min = Integer.MAX_VALUE;
@@ -67,9 +69,14 @@ public class CountMin {
                 int index = Math.abs(randomhash)%size;
                 min = Math.min(min, hash[i][index]);
             }
+            result_graph_hash.put(map.get(key),min);
             writer.write(tokens[0]+"\t\t"+tokens[1]+"\t\t"+min);
             writer.newLine();
         }
+        XYChart chart = new XYChart("Flow Cardinality", "Original vs Estimated", result_graph_hash);
+        chart.pack();
+        RefineryUtilities.centerFrameOnScreen(chart);
+        chart.setVisible(true);
         writer.close();
     }
 }
